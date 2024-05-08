@@ -3,7 +3,7 @@
 /// Contains shortcuts to Json serialization / deserialization methods, and default
 /// JavaScript Type Method Naming Convention.
 /// To User The Library in your application the use in you Program File:
-/// builder.Services.Configure<JsonOptions>(options => JOptions.CreateSettings(options.JsonSerializerOptions));
+/// builder.Services.Configure<JsonOptions>(options => JOptions.CreateOptions(options.JsonSerializerOptions));
 /// </summary>
 public static class JSON
 {

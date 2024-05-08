@@ -7,10 +7,10 @@ public static class JOptions
 {
     static JOptions()
     {
-        IgnoreNulls = CreateOptions(skipMember: false, writeNulls: false);
-        IgnoreWritingNull = CreateOptions(skipMember: false, writeNulls: true);
-        SkipMembers = CreateOptions(skipMember: true, writeNulls: false);
-        SkipMembersWriteNulls = CreateOptions(skipMember: true, writeNulls: true);
+        IgnoreNulls = CreateOptions(new JsonSerializerOptions(), skipMember: false, writeNulls: false);
+        IgnoreWritingNull = CreateOptions(new JsonSerializerOptions(), skipMember: false, writeNulls: true);
+        SkipMembers = CreateOptions(new JsonSerializerOptions(), skipMember: true, writeNulls: false);
+        SkipMembersWriteNulls = CreateOptions(new JsonSerializerOptions(), skipMember: true, writeNulls: true);
     }
 
     /// <summary>
@@ -40,17 +40,16 @@ public static class JOptions
     /// </summary>
     /// <param name="skipMember">True to ignore deserializing unmapped members</param>
     /// <param name="writeNulls">True to write null values</param>
-    public static JsonSerializerOptions CreateOptions(bool skipMember = false, bool writeNulls = false)
+    public static JsonSerializerOptions CreateOptions(JsonSerializerOptions options, bool skipMember = false, bool writeNulls = false)
     {
-        var options = new JsonSerializerOptions
-        {
-            PropertyNamingPolicy = null,
-            PropertyNameCaseInsensitive = true,
-            ReadCommentHandling = JsonCommentHandling.Skip,
-            Encoder = System.Text.Encodings.Web.JavaScriptEncoder.Create(UnicodeRanges.All),
-            NumberHandling = JsonNumberHandling.AllowNamedFloatingPointLiterals |
-                             JsonNumberHandling.AllowReadingFromString,
-        };
+        ArgumentNullException.ThrowIfNull(options, nameof(options));
+
+        options.PropertyNamingPolicy = null;
+        options.PropertyNameCaseInsensitive = true;
+        options.ReadCommentHandling = JsonCommentHandling.Skip;
+        options.Encoder = System.Text.Encodings.Web.JavaScriptEncoder.Create(UnicodeRanges.All);
+        options.NumberHandling = JsonNumberHandling.AllowNamedFloatingPointLiterals |
+                                 JsonNumberHandling.AllowReadingFromString;
         options.Converters.Add(EnumConverter.Instance);
         options.Converters.Add(Int64Converter.Instance);
         options.Converters.Add(ObjectConverter.Instance);
