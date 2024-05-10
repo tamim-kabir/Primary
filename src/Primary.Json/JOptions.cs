@@ -36,15 +36,20 @@ public static class JOptions
     public static JsonSerializerOptions SkipMembersWriteNulls { get; private set; }
 
     /// <summary>
-    /// Creates a JsonSerializerSettings object with common values and converters.
+    /// <para>Creates a JsonSerializerSettings object with common values and converters.</para>
+    /// <para>Throws an <see cref="ArgumentNullException"/> if <paramref name="options"/> is null.</para>
+    /// <para>Default Naming policy is <see cref="JsonNamingPolicy.CamelCase"/> when <paramref name="namingPolicy"/> is null.</para>
     /// </summary>
+    /// <param name="options"><see cref="JsonSerializerOptions"/></param>
     /// <param name="skipMember">True to ignore deserializing unmapped members</param>
     /// <param name="writeNulls">True to write null values</param>
-    public static JsonSerializerOptions CreateOptions(JsonSerializerOptions options, bool skipMember = false, bool writeNulls = false)
+    public static JsonSerializerOptions CreateOptions(JsonSerializerOptions options, JsonNamingPolicy? namingPolicy = null, bool skipMember = false, bool writeNulls = false)
     {
         ArgumentNullException.ThrowIfNull(options, nameof(options));
-
-        options.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
+        if (namingPolicy is not null)
+        {
+            options.PropertyNamingPolicy = namingPolicy;
+        }
         options.PropertyNameCaseInsensitive = true;
         options.ReadCommentHandling = JsonCommentHandling.Skip;
         options.Encoder = System.Text.Encodings.Web.JavaScriptEncoder.Create(UnicodeRanges.All);
