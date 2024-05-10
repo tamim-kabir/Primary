@@ -44,7 +44,7 @@ public static class JOptions
     {
         ArgumentNullException.ThrowIfNull(options, nameof(options));
 
-        options.PropertyNamingPolicy = null;
+        options.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
         options.PropertyNameCaseInsensitive = true;
         options.ReadCommentHandling = JsonCommentHandling.Skip;
         options.Encoder = System.Text.Encodings.Web.JavaScriptEncoder.Create(UnicodeRanges.All);

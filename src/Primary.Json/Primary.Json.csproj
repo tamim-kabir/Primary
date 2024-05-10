@@ -11,7 +11,8 @@
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 		<Copyright>AK_Tamim</Copyright>
 		<PackAsTool>False</PackAsTool>
-		<Version>1.0.1-rc</Version>
+		<Version>1.1.1</Version>
+		<Authors>tamim-kabir</Authors>
 	</PropertyGroup>
 
 	<ItemGroup>
