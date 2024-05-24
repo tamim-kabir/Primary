@@ -6,10 +6,12 @@
 		<Nullable>enable</Nullable>
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 		<Title>Primary.Memory</Title>
-		<Description>Batter Control On Memory And Distribute Cache</Description>
+		<Description>Batter Control On Memory And Distribute Cache With Generation</Description>
 		<Copyright>Ak_Tamim</Copyright>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 		<RepositoryUrl>https://github.com/tamim-kabir/Primary.git</RepositoryUrl>
+		<Version>1.0.0</Version>
+		<Authors>tamim-kabir</Authors>
 	</PropertyGroup>
 
 	<ItemGroup>
