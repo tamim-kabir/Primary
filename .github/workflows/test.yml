@@ -35,12 +35,10 @@ jobs:
 
     - name: Restore Dependencies
       run: dotnet restore
-      working-directory: "src"
 
     - name: dotnet build
       run: dotnet build --no-restore
-      working-directory: "src"
 
     - name: dotnet test
       run: dotnet test --no-build --verbosity normal
-      working-directory: "src"
+
