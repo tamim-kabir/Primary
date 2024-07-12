@@ -1,0 +1,46 @@
+# Builds and test 
+name: build
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+  jobs:
+  build-tests:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      with: 
+        submodules: true
+
+    - name: setup .net
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: 8.0.x
+
+    - name: Nuget package cache
+      uses: actions/cache@v4
+      id: nuget-package-cache
+      env:
+        cache-name: nuget-package-cache
+      with:
+        path: ~/.nuget/packages
+        key: ${{ runner.os }}-nuget-${{ hashFiles('**/*.csproj') }}
+        restore-keys: |
+          ${{ runner.os }}-nuget-
+
+    - name: Restore Dependencies
+      run: dotnet restore
+      working-directory: "src"
+
+    - name: dotnet build
+      run: dotnet build --no-restore
+      working-directory: "src"
+
+    - name: dotnet test
+      run: dotnet test --no-build --verbosity normal
+      working-directory: "src"
