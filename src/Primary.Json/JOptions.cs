@@ -39,16 +39,24 @@ public static class JOptions
     /// <para>Creates a JsonSerializerSettings object with common values and converters.</para>
     /// <para>Throws an <see cref="ArgumentNullException"/> if <paramref name="options"/> is null.</para>
     /// <para>Default Naming policy is <see cref="JsonNamingPolicy.CamelCase"/> when <paramref name="namingPolicy"/> is null.</para>
+    /// <para>Default Reference Handler is <see cref="ReferenceHandler.IgnoreCycles"/> when <paramref name="referenceHandler"/> is null.</para>
     /// </summary>
     /// <param name="options"><see cref="JsonSerializerOptions"/></param>
+    /// <param name="namingPolicy"><see cref="JsonNamingPolicy"/></param>
+    /// <param name="referenceHandler"><see cref="ReferenceHandler"/></param>
     /// <param name="skipMember">True to ignore deserializing unmapped members</param>
     /// <param name="writeNulls">True to write null values</param>
-    public static JsonSerializerOptions CreateOptions(JsonSerializerOptions options, JsonNamingPolicy? namingPolicy = null, bool skipMember = false, bool writeNulls = false)
+    public static JsonSerializerOptions CreateOptions(JsonSerializerOptions options, JsonNamingPolicy? namingPolicy = null, ReferenceHandler referenceHandler = null, bool skipMember = false, bool writeNulls = false)
     {
         ArgumentNullException.ThrowIfNull(options, nameof(options));
         if (namingPolicy is not null)
         {
             options.PropertyNamingPolicy = namingPolicy;
+        }
+        options.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+        if (referenceHandler is not null)
+        {
+            options.ReferenceHandler = referenceHandler;
         }
         options.PropertyNameCaseInsensitive = true;
         options.ReadCommentHandling = JsonCommentHandling.Skip;

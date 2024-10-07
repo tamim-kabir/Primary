@@ -18,6 +18,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Asset", "Asset", "{42AF8278-5D8B-44BB-849E-7FE42AC59679}"
 	ProjectSection(SolutionItems) = preProject
 		src\Primary.Json\badge.svg = src\Primary.Json\badge.svg
+		README.md = README.md
 	EndProjectSection
 EndProject
 Global

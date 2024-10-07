@@ -41,7 +41,7 @@ public static class CacheFactoryExtensions
 
     /// <summary>
     /// Tries to read a value from local cache. If it is not found there, tries the distributed cache. 
-    /// If neither contains the specified key, produces value by calling a loader function and adds the
+    /// If neither contains the specified key, produces value by calling a factory function and adds the
     /// value to local and distributed cache for a given expiration time. By using a group key, 
     /// all items on both cache types that are members of this group can be expired at once. </summary>
     /// <remarks>
@@ -98,7 +98,7 @@ public static class CacheFactoryExtensions
     }
 
     /// <summary>
-    /// Tries to read a value from local cache. If it is not found there produces value by calling a loader 
+    /// Tries to read a value from local cache. If it is not found there produces value by calling a factory 
     /// function and adds the value to local cache for a given expiration time. By using a generation 
     /// (item version) key, all items on local cache that are members of this group can be expired 
     /// at once. </summary>
